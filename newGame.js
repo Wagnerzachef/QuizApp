@@ -1,4 +1,5 @@
 const question = document.querySelector('#question');
+const quizImg = document.getElementById('quizImg');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
@@ -10,17 +11,14 @@ let score = 0
 let questionCounter = 0
 let availableQuestions = []
 
-var images = {
-    "giorgio" : "images/giorgio.jpg"
-}
-
 let questions = [
     {
-        question: 'Which art piece is Impression, Sunrise by Claude Monet?',
-        choice1: "giorgio",
-        choice2: 'images/impression.jpg',
-        choice3: 'images/sunset.jpg',
-        choice4: 'images/clouds.jpg',
+        question: 'What is this art piece ?',
+        imgSrc: 'images/impression.jpg',
+        choice1: "San Giorgio Maggiore at Dusk by Claud Monet",
+        choice2: 'Impression, Sunrise by Claude Monet',
+        choice3: 'The Houses of Parliment, Sunset by Claude Monet',
+        choice4: 'Reflections of Clouds on the Water-Lily Pond by Claude Monet',
         answer: 2
     }
     
@@ -50,6 +48,8 @@ getNewQuestion = () => {
     const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
     currentQuestion = availableQuestions[questionsIndex]
     question.innerText = currentQuestion.question
+
+    quizImg.innerHTML = '<img src=' + currentQuestion.imgSrc + '>'
 
     choices.forEach(choice => {
         const number = choice.dataset['number']
