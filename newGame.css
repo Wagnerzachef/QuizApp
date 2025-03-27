@@ -6,6 +6,10 @@ body {
     text-align: center;
 }
 
+.choice-image {
+    text-align: center;
+}
+
 .choice-container {
     display: flex;
     margin-bottom: 0.8rem;
