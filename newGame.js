@@ -105,7 +105,7 @@ let questions = [
         image3: '',
         choice4: 'Robert Altman',
         image4: '',
-        answer: 3
+        answer: 2
     },
     {
         question: 'Which painting made by Leonardo Da Vinci is permanently displayed in the Louvvre Museum?',
@@ -162,7 +162,7 @@ getNewQuestion = () => {
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score)
 
-        return window.location.assign('/end.html')
+        return window.location.assign('/newEnd.html')
     }
 
     questionCounter++
