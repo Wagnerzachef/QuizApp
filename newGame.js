@@ -13,8 +13,9 @@ let currentQuestion = {}
 let acceptingAnswers = true
 let score = 0
 let questionCounter = 0
-let availableQuestions = []
+let availableQuestions = [] //create an empty array for available questions
 
+//Create an array of questions
 let questions = [
     {
         question: 'What is the name of this art piece?',
@@ -154,13 +155,14 @@ const MAX_QUESTIONS = 10
 startGame = () => {
     questionCounter = 0
     score = 0
-    availableQuestions = [...questions]
+    availableQuestions = [...questions] //fill empty availablequestions array with questions
     getNewQuestion()
 }
 
+//function to place new question on screen
 getNewQuestion = () => {
     if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
-        localStorage.setItem('mostRecentScore', score)
+        localStorage.setItem('mostRecentScore', score) //sets score in local storage and ends game
 
         return window.location.assign('/newEnd.html')
     }
@@ -169,9 +171,9 @@ getNewQuestion = () => {
     progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
     progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
     
-    const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
-    currentQuestion = availableQuestions[questionsIndex]
-    question.innerText = currentQuestion.question
+    const questionsIndex = Math.floor(Math.random() * availableQuestions.length) //gets a random question from availablequestions array
+    currentQuestion = availableQuestions[questionsIndex] //sets it to current question
+    question.innerText = currentQuestion.question //and puts it on screen
 
     quizImg.innerHTML = '<img src=' + currentQuestion.imgSrc + '>'
 
@@ -181,19 +183,20 @@ getNewQuestion = () => {
     img4.innerHTML = '<img src=' + currentQuestion.image4 + '>'
 
     
-
-    choices.forEach(choice => {
+    //populates the choices for the radio buttons
+    choices.forEach(choice => { 
         const number = choice.dataset['number']
         choice.innerText = currentQuestion['choice' + number]
         
     })
     
 
-    availableQuestions.splice(questionsIndex, 1)
+    availableQuestions.splice(questionsIndex, 1) //takes the question out of the availablequestions array
 
     acceptingAnswers = true
 }
 
+//checks for right or wrong answers when choice is clicked
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
         if(!acceptingAnswers) return
@@ -202,7 +205,7 @@ choices.forEach(choice => {
         const selectedChoice = e.target
         const selectedAnswer = selectedChoice.dataset['number']
 
-        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
+        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect' //sets classtoapplay to correct or incorrect depending on the selected answer
 
         if(classToApply === 'correct') {
             incrementScore(SCORE_POINTS)

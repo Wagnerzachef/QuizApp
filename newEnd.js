@@ -13,6 +13,7 @@ username.addEventListener('keyup', () => {
     saveScoreBtn.disabled = !username.value
 })
 
+//function saves most recent score to local storage array called newHighScores
 saveHighScore = e => {
     e.preventDefault()
 
